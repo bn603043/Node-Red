@@ -1,0 +1,102 @@
+[
+    {
+        "id": "7f46fef2.0a93e",
+        "type": "tab",
+        "label": "Flow 1"
+    },
+    {
+        "id": "4fa8cb4d.60f954",
+        "type": "inject",
+        "z": "7f46fef2.0a93e",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "x": 190,
+        "y": 360,
+        "wires": [
+            [
+                "733d0124.93fd4"
+            ]
+        ]
+    },
+    {
+        "id": "733d0124.93fd4",
+        "type": "function",
+        "z": "7f46fef2.0a93e",
+        "name": "Payload",
+        "func": "msg.headers={\n    deviceKey: \"NdF0k1Zh5ZO0TdUZ\"\n    };\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 360,
+        "y": 360,
+        "wires": [
+            [
+                "9455c4fa.97b848",
+                "baef3fc4.0de37"
+            ]
+        ]
+    },
+    {
+        "id": "9455c4fa.97b848",
+        "type": "http request",
+        "z": "7f46fef2.0a93e",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "url": "http://api.mediatek.com/mcs/v2/devices/DanWu30y/datachannels/humidity/datapoints.csv",
+        "tls": "",
+        "x": 590,
+        "y": 340,
+        "wires": [
+            [
+                "2f07f17.71e5e0e",
+                "1522c32f.8be48d"
+            ]
+        ]
+    },
+    {
+        "id": "2f07f17.71e5e0e",
+        "type": "http response",
+        "z": "7f46fef2.0a93e",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 850,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "1522c32f.8be48d",
+        "type": "debug",
+        "z": "7f46fef2.0a93e",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 830,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "baef3fc4.0de37",
+        "type": "http request",
+        "z": "7f46fef2.0a93e",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "url": "http://api.mediatek.com/mcs/v2/devices/DanWu30y/datachannels/temperature/datapoints.csv",
+        "tls": "",
+        "x": 590,
+        "y": 420,
+        "wires": [
+            [
+                "1522c32f.8be48d",
+                "2f07f17.71e5e0e"
+            ]
+        ]
+    }
+]
